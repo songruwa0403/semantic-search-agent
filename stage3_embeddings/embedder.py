@@ -58,13 +58,12 @@ class TextEmbedder:
         try:
             print(f"🔄 Loading embedding model: {self.model_name}")
             
-            # TODO: Initialize the sentence transformer model
-            # self.model = SentenceTransformer(self.model_name)
+            # Initialize the sentence transformer model
+            self.model = SentenceTransformer(self.model_name)
             
-            # TODO: Get embedding dimension
-            # Test with a sample text to get dimensions
-            # sample_embedding = self.model.encode("test")
-            # self.embedding_dim = len(sample_embedding)
+            # Get embedding dimension by testing with sample text
+            sample_embedding = self.model.encode("test")
+            self.embedding_dim = len(sample_embedding)
             
             print(f"✅ Model loaded successfully")
             print(f"📏 Embedding dimension: {self.embedding_dim}")
@@ -96,26 +95,28 @@ class TextEmbedder:
             return np.array([])
         
         print(f"🔄 Generating embeddings for {len(texts)} texts...")
+        start_time = time.time()
         
-        # TODO: Implement batch embedding generation
-        # Options:
-        # 1. Use model.encode() with batch processing
-        # 2. Handle memory management for large datasets
-        # 3. Add progress tracking
-        
-        # Placeholder implementation:
-        # embeddings = self.model.encode(
-        #     texts,
-        #     batch_size=batch_size,
-        #     show_progress_bar=show_progress,
-        #     convert_to_numpy=True
-        # )
-        
-        # For now, return random embeddings as placeholder
-        embeddings = np.random.rand(len(texts), 384)  # Replace with actual implementation
-        
-        print(f"✅ Generated {len(embeddings)} embeddings")
-        return embeddings
+        try:
+            # Generate embeddings using sentence-transformers
+            embeddings = self.model.encode(
+                texts,
+                batch_size=batch_size,
+                show_progress_bar=show_progress,
+                convert_to_numpy=True,
+                normalize_embeddings=True  # Normalize for better cosine similarity
+            )
+            
+            elapsed_time = time.time() - start_time
+            print(f"✅ Generated {len(embeddings)} embeddings in {elapsed_time:.2f}s")
+            print(f"📏 Embedding shape: {embeddings.shape}")
+            
+            return embeddings
+            
+        except Exception as e:
+            print(f"❌ Error generating embeddings: {e}")
+            # Return empty array with correct dimensions
+            return np.array([]).reshape(0, self.embedding_dim)
     
     def embed_dataframe(self, 
                        df: pd.DataFrame, 
@@ -167,13 +168,14 @@ class TextEmbedder:
         Returns:
             float: Cosine similarity score (-1 to 1)
         """
-        # TODO: Implement cosine similarity computation
         # Convert to numpy arrays if needed
-        # Use sklearn.metrics.pairwise.cosine_similarity
-        # or implement manually: dot(a,b) / (norm(a) * norm(b))
+        emb1 = np.array(embedding1).reshape(1, -1)
+        emb2 = np.array(embedding2).reshape(1, -1)
         
-        # Placeholder implementation
-        return 0.5
+        # Compute cosine similarity using sklearn
+        similarity = cosine_similarity(emb1, emb2)[0, 0]
+        
+        return float(similarity)
     
     def find_most_similar(self, 
                          query_embedding: Union[np.ndarray, List[float]],
@@ -190,15 +192,23 @@ class TextEmbedder:
         Returns:
             List[Tuple[int, float]]: List of (index, similarity_score) tuples
         """
-        # TODO: Implement similarity search
-        # 1. Compute similarities between query and all candidates
-        # 2. Sort by similarity score
-        # 3. Return top_k results
+        if len(candidate_embeddings) == 0:
+            return []
         
-        # Placeholder implementation
-        similarities = np.random.rand(len(candidate_embeddings))
-        indices = np.argsort(similarities)[::-1][:top_k]
-        return [(int(idx), float(similarities[idx])) for idx in indices]
+        # Convert query to proper shape
+        query = np.array(query_embedding).reshape(1, -1)
+        
+        # Compute similarities between query and all candidates
+        similarities = cosine_similarity(query, candidate_embeddings)[0]
+        
+        # Get top_k most similar indices
+        top_k = min(top_k, len(similarities))
+        top_indices = np.argsort(similarities)[::-1][:top_k]
+        
+        # Return list of (index, similarity_score) tuples
+        results = [(int(idx), float(similarities[idx])) for idx in top_indices]
+        
+        return results
     
     def compare_texts(self, 
                      text1: str, 
@@ -216,11 +226,10 @@ class TextEmbedder:
         if not self.model:
             raise ValueError("Model not loaded. Call load_model() first.")
         
-        # TODO: Implement direct text comparison
-        # 1. Embed both texts
-        # 2. Compute similarity
-        
+        # Embed both texts
         embeddings = self.embed_texts([text1, text2])
+        
+        # Compute and return similarity
         return self.compute_similarity(embeddings[0], embeddings[1])
     
     def semantic_search(self, 
@@ -282,63 +291,139 @@ class TextEmbedder:
         if 'embedding' not in df.columns:
             raise ValueError("DataFrame must have 'embedding' column")
         
+        print("🔄 Evaluating embedding quality...")
         metrics = {}
-        
-        # TODO: Implement embedding evaluation
-        # 1. Embedding distribution statistics
-        # 2. Sample similarity calculations
-        # 3. Clustering analysis (optional)
-        # 4. Query-based evaluation if sample_queries provided
         
         embeddings = np.array(df['embedding'].tolist())
         
         # Basic statistics
         metrics['num_embeddings'] = len(embeddings)
         metrics['embedding_dim'] = embeddings.shape[1] if len(embeddings) > 0 else 0
-        # metrics['mean_magnitude'] = np.mean(np.linalg.norm(embeddings, axis=1))
-        # metrics['std_magnitude'] = np.std(np.linalg.norm(embeddings, axis=1))
         
+        if len(embeddings) > 0:
+            # Embedding magnitude statistics
+            magnitudes = np.linalg.norm(embeddings, axis=1)
+            metrics['mean_magnitude'] = float(np.mean(magnitudes))
+            metrics['std_magnitude'] = float(np.std(magnitudes))
+            metrics['min_magnitude'] = float(np.min(magnitudes))
+            metrics['max_magnitude'] = float(np.max(magnitudes))
+            
+            # Similarity distribution (sample random pairs)
+            if len(embeddings) > 1:
+                n_samples = min(1000, len(embeddings) * (len(embeddings) - 1) // 2)
+                sample_indices = np.random.choice(len(embeddings), size=(n_samples, 2), replace=True)
+                
+                similarities = []
+                for i, j in sample_indices:
+                    if i != j:
+                        sim = self.compute_similarity(embeddings[i], embeddings[j])
+                        similarities.append(sim)
+                
+                if similarities:
+                    metrics['mean_similarity'] = float(np.mean(similarities))
+                    metrics['std_similarity'] = float(np.std(similarities))
+                    metrics['min_similarity'] = float(np.min(similarities))
+                    metrics['max_similarity'] = float(np.max(similarities))
+        
+        # Query-based evaluation if sample queries provided
+        if sample_queries and len(embeddings) > 0:
+            query_metrics = []
+            
+            for query in sample_queries:
+                try:
+                    results = self.semantic_search(query, df, top_k=5)
+                    if not results.empty:
+                        # Calculate metrics for this query
+                        top_scores = results['similarity_score'].tolist()
+                        query_metrics.append({
+                            'query': query,
+                            'top_score': max(top_scores),
+                            'avg_top5_score': np.mean(top_scores),
+                            'score_range': max(top_scores) - min(top_scores)
+                        })
+                except Exception as e:
+                    print(f"⚠️ Error evaluating query '{query}': {e}")
+            
+            if query_metrics:
+                metrics['query_evaluation'] = query_metrics
+                metrics['avg_top_score'] = float(np.mean([q['top_score'] for q in query_metrics]))
+                metrics['avg_score_range'] = float(np.mean([q['score_range'] for q in query_metrics]))
+        
+        print(f"✅ Evaluation complete. Generated {len(metrics)} metrics.")
         return metrics
     
     def _cache_embeddings(self, df: pd.DataFrame, cache_file: str):
-        """Cache embeddings to file"""
+        """Cache embeddings to file with metadata"""
         os.makedirs(os.path.dirname(cache_file), exist_ok=True)
         
-        # TODO: Implement caching strategy
-        # Options: pickle, HDF5, parquet, etc.
-        # Consider storing metadata (model name, version, etc.)
-        
+        # Prepare cache data with comprehensive metadata
         cache_data = {
             'model_name': self.model_name,
             'embedding_dim': self.embedding_dim,
+            'timestamp': time.time(),
+            'num_embeddings': len(df),
             'embeddings': df['embedding'].tolist(),
-            'text_hashes': df['text'].apply(hash).tolist()  # For validation
+            'text_hashes': df['text'].apply(lambda x: hash(str(x))).tolist(),
+            'metadata': {
+                'chunk_ids': df.get('chunk_id', pd.Series()).tolist(),
+                'source_ids': df.get('source_id', pd.Series()).tolist(),
+                'chunk_types': df.get('chunk_type', pd.Series()).tolist()
+            }
         }
         
-        with open(cache_file, 'wb') as f:
-            pickle.dump(cache_data, f)
-        
-        print(f"💾 Embeddings cached to {cache_file}")
+        try:
+            with open(cache_file, 'wb') as f:
+                pickle.dump(cache_data, f)
+            
+            file_size = os.path.getsize(cache_file) / (1024 * 1024)  # MB
+            print(f"💾 Embeddings cached to {cache_file} ({file_size:.1f} MB)")
+            
+        except Exception as e:
+            print(f"❌ Error caching embeddings: {e}")
     
     def _load_cached_embeddings(self, df: pd.DataFrame, cache_file: str) -> pd.DataFrame:
-        """Load cached embeddings"""
-        # TODO: Implement cache loading with validation
-        # Check model compatibility, text hashes, etc.
-        
+        """Load cached embeddings with comprehensive validation"""
         try:
             with open(cache_file, 'rb') as f:
                 cache_data = pickle.load(f)
             
-            # Validate cache
+            # Validate cache compatibility
             if cache_data['model_name'] != self.model_name:
                 print(f"⚠️ Model mismatch in cache. Expected {self.model_name}, got {cache_data['model_name']}")
                 return self.embed_dataframe(df, cache_file=None)
             
-            # Add embeddings to DataFrame
+            if len(cache_data['embeddings']) != len(df):
+                print(f"⚠️ Size mismatch in cache. Expected {len(df)}, got {len(cache_data['embeddings'])}")
+                return self.embed_dataframe(df, cache_file=None)
+            
+            # Validate some text hashes for data integrity
+            current_hashes = df['text'].apply(lambda x: hash(str(x))).tolist()
+            cached_hashes = cache_data['text_hashes']
+            
+            # Check a sample of hashes for validation
+            sample_size = min(100, len(current_hashes))
+            sample_indices = np.random.choice(len(current_hashes), sample_size, replace=False)
+            
+            mismatches = 0
+            for idx in sample_indices:
+                if current_hashes[idx] != cached_hashes[idx]:
+                    mismatches += 1
+            
+            if mismatches > sample_size * 0.1:  # Allow 10% mismatch tolerance
+                print(f"⚠️ Data integrity check failed. {mismatches}/{sample_size} hash mismatches")
+                return self.embed_dataframe(df, cache_file=None)
+            
+            # Cache is valid - add embeddings to DataFrame
             df_cached = df.copy()
             df_cached['embedding'] = cache_data['embeddings']
             
+            # Show cache info
+            cache_age = time.time() - cache_data.get('timestamp', 0)
+            file_size = os.path.getsize(cache_file) / (1024 * 1024)  # MB
+            
             print(f"✅ Loaded {len(cache_data['embeddings'])} cached embeddings")
+            print(f"📁 Cache: {file_size:.1f} MB, {cache_age/3600:.1f} hours old")
+            
             return df_cached
             
         except Exception as e:
