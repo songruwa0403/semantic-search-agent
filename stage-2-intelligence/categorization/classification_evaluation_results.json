@@ -1,0 +1,292 @@
+{
+  "predictions": {
+    "test_0": [
+      "injury"
+    ],
+    "test_1": [
+      "nutrition"
+    ],
+    "test_2": [
+      "beginner"
+    ],
+    "test_3": [
+      "motivation"
+    ],
+    "test_4": [
+      "programming"
+    ],
+    "test_5": [
+      "weight_management"
+    ],
+    "test_6": [
+      "cardio"
+    ],
+    "test_7": [
+      "flexibility"
+    ],
+    "test_8": [
+      "beginner"
+    ],
+    "test_9": [
+      "strength"
+    ]
+  },
+  "confidence_scores": {
+    "test_0": {
+      "injury": 0.528801679611206,
+      "cardio": 0.16872990131378174,
+      "strength": 0.06958140432834625,
+      "technique": 0.054022084921598434,
+      "advanced": 0.04652237147092819,
+      "flexibility": 0.035382967442274094,
+      "weight_management": 0.02949792891740799,
+      "equipment": 0.026675675064325333,
+      "motivation": 0.018488574773073196,
+      "beginner": 0.010679110884666443,
+      "programming": 0.006129968911409378,
+      "nutrition": 0.0054883165284991264
+    },
+    "test_1": {
+      "nutrition": 0.5273789763450623,
+      "strength": 0.2658693790435791,
+      "motivation": 0.0546339713037014,
+      "advanced": 0.053830914199352264,
+      "weight_management": 0.039936259388923645,
+      "technique": 0.01618986576795578,
+      "equipment": 0.012560682371258736,
+      "beginner": 0.012225464917719364,
+      "programming": 0.00789700448513031,
+      "flexibility": 0.004341513849794865,
+      "injury": 0.0032342441845685244,
+      "cardio": 0.0019017396261915565
+    },
+    "test_2": {
+      "beginner": 0.578864336013794,
+      "equipment": 0.27594900131225586,
+      "motivation": 0.02972562424838543,
+      "flexibility": 0.028876464813947678,
+      "technique": 0.02569383941590786,
+      "strength": 0.021241474896669388,
+      "weight_management": 0.013974785804748535,
+      "cardio": 0.007536109536886215,
+      "advanced": 0.005619067698717117,
+      "injury": 0.00508917635306716,
+      "programming": 0.004308812320232391,
+      "nutrition": 0.003121356014162302
+    },
+    "test_3": {
+      "motivation": 0.8042528033256531,
+      "weight_management": 0.03991331905126572,
+      "equipment": 0.03343003988265991,
+      "advanced": 0.032356031239032745,
+      "strength": 0.026194147765636444,
+      "cardio": 0.013796864077448845,
+      "beginner": 0.012458800338208675,
+      "flexibility": 0.010809430852532387,
+      "technique": 0.009219225496053696,
+      "nutrition": 0.006790426094084978,
+      "programming": 0.005595478229224682,
+      "injury": 0.005183244124054909
+    },
+    "test_4": {
+      "programming": 0.3055249750614166,
+      "strength": 0.26448512077331543,
+      "weight_management": 0.2586451768875122,
+      "technique": 0.08317339420318604,
+      "equipment": 0.02946498431265354,
+      "motivation": 0.020996037870645523,
+      "advanced": 0.017488209530711174,
+      "flexibility": 0.00650113495066762,
+      "beginner": 0.005922336596995592,
+      "injury": 0.004308314528316259,
+      "nutrition": 0.00221836194396019,
+      "cardio": 0.0012720946688205004
+    },
+    "test_5": {
+      "weight_management": 0.4536944329738617,
+      "nutrition": 0.15593838691711426,
+      "motivation": 0.11908435076475143,
+      "flexibility": 0.09977204352617264,
+      "technique": 0.0535164400935173,
+      "advanced": 0.043107468634843826,
+      "beginner": 0.02276250720024109,
+      "strength": 0.019919702783226967,
+      "programming": 0.011860322207212448,
+      "injury": 0.008723064325749874,
+      "equipment": 0.008015550673007965,
+      "cardio": 0.00360576412640512
+    },
+    "test_6": {
+      "cardio": 0.7804540991783142,
+      "weight_management": 0.08639457076787949,
+      "equipment": 0.03919810801744461,
+      "advanced": 0.03402804583311081,
+      "motivation": 0.02040885016322136,
+      "beginner": 0.01406536903232336,
+      "technique": 0.00995760690420866,
+      "programming": 0.004405528772622347,
+      "strength": 0.0034576691687107086,
+      "injury": 0.0032182163558900356,
+      "flexibility": 0.002355608157813549,
+      "nutrition": 0.0020562864374369383
+    },
+    "test_7": {
+      "flexibility": 0.7353674173355103,
+      "technique": 0.0982850193977356,
+      "motivation": 0.058404840528964996,
+      "advanced": 0.045868776738643646,
+      "weight_management": 0.016512516885995865,
+      "strength": 0.012957162223756313,
+      "equipment": 0.009069862775504589,
+      "beginner": 0.008997714146971703,
+      "cardio": 0.005285436753183603,
+      "programming": 0.003770959796383977,
+      "nutrition": 0.0028698851820081472,
+      "injury": 0.0026103840209543705
+    },
+    "test_8": {
+      "beginner": 0.807171106338501,
+      "strength": 0.08683987706899643,
+      "weight_management": 0.05103518068790436,
+      "equipment": 0.02197938971221447,
+      "flexibility": 0.009590723551809788,
+      "technique": 0.008507250808179379,
+      "motivation": 0.005050769075751305,
+      "advanced": 0.002696325769647956,
+      "cardio": 0.0025427460204809904,
+      "injury": 0.002028627321124077,
+      "programming": 0.001352621242403984,
+      "nutrition": 0.0012054264079779387
+    },
+    "test_9": {
+      "strength": 0.30648624897003174,
+      "advanced": 0.2678352892398834,
+      "technique": 0.262922465801239,
+      "equipment": 0.0708584114909172,
+      "weight_management": 0.05628025159239769,
+      "motivation": 0.012088187038898468,
+      "beginner": 0.006409428548067808,
+      "flexibility": 0.004947016015648842,
+      "injury": 0.004863475915044546,
+      "programming": 0.0031001016031950712,
+      "cardio": 0.0026319853495806456,
+      "nutrition": 0.001577116665430367
+    }
+  },
+  "category_stats": {
+    "injury": 1,
+    "nutrition": 1,
+    "beginner": 2,
+    "motivation": 1,
+    "programming": 1,
+    "weight_management": 1,
+    "cardio": 1,
+    "flexibility": 1,
+    "strength": 1
+  },
+  "performance_metrics": {
+    "avg_confidence": 0.08333333325766337,
+    "min_confidence": 0.0012054264079779387,
+    "max_confidence": 0.807171106338501,
+    "categories_covered": 9,
+    "total_categories": 12,
+    "coverage_rate": 0.75,
+    "multi_label_rate": 0.0,
+    "single_label_rate": 1.0,
+    "avg_labels_per_text": 1.0
+  },
+  "threshold": 0.3,
+  "model_info": {
+    "model_name": "facebook/bart-large-mnli",
+    "device": "cpu",
+    "categories": [
+      "injury",
+      "nutrition",
+      "equipment",
+      "motivation",
+      "technique",
+      "programming",
+      "weight_management",
+      "strength",
+      "cardio",
+      "flexibility",
+      "beginner",
+      "advanced"
+    ]
+  },
+  "fitness_categories": {
+    "injury": "Pain, discomfort, injuries, rehabilitation, recovery, aches, soreness, medical issues",
+    "nutrition": "Diet, meal planning, supplements, protein, calories, macros, eating habits, food",
+    "equipment": "Gym equipment, gear, tools, machines, weights, accessories, home gym setup",
+    "motivation": "Mental barriers, consistency, goal setting, discipline, staying motivated, mindset",
+    "technique": "Form, exercise execution, proper movement, technique tips, how-to guides",
+    "programming": "Workout plans, routines, sets, reps, progression, periodization, training structure",
+    "weight_management": "Weight loss, weight gain, body composition, cutting, bulking, fat loss",
+    "strength": "Building strength, powerlifting, deadlifts, squats, bench press, PRs",
+    "cardio": "Running, cycling, swimming, endurance, HIIT, cardiovascular fitness",
+    "flexibility": "Stretching, mobility, yoga, flexibility training, range of motion",
+    "beginner": "Starting fitness, newbie questions, basic advice, getting started",
+    "advanced": "Advanced techniques, elite training, competition, specialized training"
+  },
+  "statistics": {
+    "total_texts": 10,
+    "total_categories": 12,
+    "categories_used": 9,
+    "category_coverage": 0.75,
+    "avg_confidence": 0.08333333325766337,
+    "multi_label_rate": 0.0,
+    "avg_labels_per_text": 1.0,
+    "threshold": 0.3,
+    "model_info": {
+      "model_name": "facebook/bart-large-mnli",
+      "device": "cpu",
+      "categories": [
+        "injury",
+        "nutrition",
+        "equipment",
+        "motivation",
+        "technique",
+        "programming",
+        "weight_management",
+        "strength",
+        "cardio",
+        "flexibility",
+        "beginner",
+        "advanced"
+      ]
+    },
+    "top_categories": [
+      [
+        "beginner",
+        2
+      ],
+      [
+        "injury",
+        1
+      ],
+      [
+        "nutrition",
+        1
+      ],
+      [
+        "motivation",
+        1
+      ],
+      [
+        "programming",
+        1
+      ]
+    ],
+    "category_distribution": {
+      "injury": 1,
+      "nutrition": 1,
+      "beginner": 2,
+      "motivation": 1,
+      "programming": 1,
+      "weight_management": 1,
+      "cardio": 1,
+      "flexibility": 1,
+      "strength": 1
+    }
+  }
+}

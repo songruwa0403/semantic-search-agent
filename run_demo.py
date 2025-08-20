@@ -54,7 +54,7 @@ def main():
             python_exe = os.path.join(venv_path, "bin", "python")
         
         # Change to frontend directory
-        frontend_dir = os.path.join(project_dir, "frontend")
+        frontend_dir = os.path.join(project_dir, "stage-4-interface", "frontend")
         os.chdir(frontend_dir)
         
         # Start the Flask app
@@ -67,7 +67,7 @@ def main():
         time.sleep(5)
         
         # Try to open browser
-        url = "http://localhost:5000"
+        url = "http://localhost:5001"
         print(f"🌐 Opening browser to: {url}")
         try:
             webbrowser.open(url)
@@ -93,8 +93,8 @@ def main():
     except Exception as e:
         print(f"❌ Error starting demo: {e}")
         print("Please try running manually:")
-        print("   cd frontend")
-        print("   source ../venv/bin/activate")
+        print("   cd stage-4-interface/frontend")
+        print("   source ../../venv/bin/activate")
         print("   python app.py")
 
 if __name__ == "__main__":

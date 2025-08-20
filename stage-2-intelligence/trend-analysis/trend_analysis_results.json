@@ -1,0 +1,219 @@
+{
+  "temporal_patterns": {
+    "total_discussions": 18130,
+    "avg_daily_discussions": 78.14655172413794,
+    "peak_discussions": 98,
+    "peak_date": "2024-03-23T00:00:00",
+    "trend_direction": "stable",
+    "volatility": 8.840789392068494,
+    "growth_rate": 0.009195846268962748,
+    "activity_distribution": {
+      "low_activity_days": 57,
+      "medium_activity_days": 128,
+      "high_activity_days": 47,
+      "consistency_score": 0.8868691043189505
+    }
+  },
+  "seasonal_patterns": {
+    "day_of_week_pattern": {
+      "Monday": 65.1470588235294,
+      "Tuesday": 76.78787878787878,
+      "Wednesday": 78.72727272727273,
+      "Thursday": 76.51515151515152,
+      "Friday": 79.15151515151516,
+      "Saturday": 90.0909090909091,
+      "Sunday": 81.0
+    },
+    "monthly_pattern": {
+      "Jan": 76.06451612903226,
+      "Feb": 78.6896551724138,
+      "Mar": 78.90322580645162,
+      "Apr": 78.2,
+      "May": 78.29032258064517,
+      "Jun": 78.9,
+      "Jul": 78.09677419354838,
+      "Aug": 78.05263157894737,
+      "Sep": 0.0,
+      "Oct": 0.0,
+      "Nov": 0.0,
+      "Dec": 0.0
+    },
+    "seasonality_strength": 0.6313007384999071,
+    "cyclic_patterns": {
+      "weekly_cycle": 0.6313007384999071,
+      "detected_cycles": [
+        {
+          "type": "discussion_peaks",
+          "average_length": 3.5076923076923077,
+          "count": 66
+        }
+      ]
+    }
+  },
+  "category_trends": {
+    "strength": {
+      "trend_direction": "stable",
+      "growth_rate": 0.009333202419437692,
+      "peak_periods": 66,
+      "correlation_with_overall": 0.7198464816274663
+    },
+    "nutrition": {
+      "trend_direction": "stable",
+      "growth_rate": 0.007641055327505031,
+      "peak_periods": 59,
+      "correlation_with_overall": 0.7779631232934098
+    },
+    "equipment": {
+      "trend_direction": "stable",
+      "growth_rate": 0.009061354372474684,
+      "peak_periods": 70,
+      "correlation_with_overall": 0.7694114233540514
+    },
+    "motivation": {
+      "trend_direction": "stable",
+      "growth_rate": 0.008735381414920695,
+      "peak_periods": 68,
+      "correlation_with_overall": 0.7782454936840303
+    },
+    "injury": {
+      "trend_direction": "stable",
+      "growth_rate": 0.008601047359903413,
+      "peak_periods": 65,
+      "correlation_with_overall": 0.7237863450709796
+    },
+    "beginner": {
+      "trend_direction": "stable",
+      "growth_rate": 0.008387254650868314,
+      "peak_periods": 69,
+      "correlation_with_overall": 0.7627737671114749
+    },
+    "advanced": {
+      "trend_direction": "stable",
+      "growth_rate": 0.007903121603737295,
+      "peak_periods": 64,
+      "correlation_with_overall": 0.7503209645257259
+    },
+    "cardio": {
+      "trend_direction": "stable",
+      "growth_rate": 0.008614282513559779,
+      "peak_periods": 69,
+      "correlation_with_overall": 0.753234629621875
+    }
+  },
+  "anomalies": [
+    {
+      "date": "2024-01-01T00:00:00",
+      "discussion_count": 7,
+      "z_score": 8.047533830855308,
+      "type": "drop",
+      "severity": "high"
+    }
+  ],
+  "forecasts": {
+    "linear_trend": {
+      "slope": 0.00579677832896717,
+      "r_squared": 0.0019283148752838358,
+      "forecast_values": [
+        78.82187639946261,
+        78.82767317779158,
+        78.83346995612055,
+        78.83926673444952,
+        78.84506351277848,
+        78.85086029110745,
+        78.85665706943642
+      ],
+      "confidence": "low"
+    },
+    "moving_average": {
+      "window": 7,
+      "latest_ma": 76.85714285714286,
+      "forecast": 76.85714285714286
+    }
+  },
+  "insights": [
+    "\ud83d\udd25 Peak activity occurred on March 23, 2024 with 98 discussions",
+    "\ud83d\udcc5 Highest activity occurs on Saturdays",
+    "\u26a0\ufe0f Detected 1 significant activity spikes/drops"
+  ],
+  "statistics": {
+    "temporal_summary": {
+      "total_discussions": 18130,
+      "avg_daily_discussions": 78.14655172413794,
+      "peak_discussions": 98,
+      "peak_date": "2024-03-23T00:00:00",
+      "trend_direction": "stable",
+      "volatility": 8.840789392068494,
+      "growth_rate": 0.009195846268962748,
+      "activity_distribution": {
+        "low_activity_days": 57,
+        "medium_activity_days": 128,
+        "high_activity_days": 47,
+        "consistency_score": 0.8868691043189505
+      }
+    },
+    "seasonal_summary": {
+      "day_of_week_pattern": {
+        "Monday": 65.1470588235294,
+        "Tuesday": 76.78787878787878,
+        "Wednesday": 78.72727272727273,
+        "Thursday": 76.51515151515152,
+        "Friday": 79.15151515151516,
+        "Saturday": 90.0909090909091,
+        "Sunday": 81.0
+      },
+      "monthly_pattern": {
+        "Jan": 76.06451612903226,
+        "Feb": 78.6896551724138,
+        "Mar": 78.90322580645162,
+        "Apr": 78.2,
+        "May": 78.29032258064517,
+        "Jun": 78.9,
+        "Jul": 78.09677419354838,
+        "Aug": 78.05263157894737,
+        "Sep": 0.0,
+        "Oct": 0.0,
+        "Nov": 0.0,
+        "Dec": 0.0
+      },
+      "seasonality_strength": 0.6313007384999071,
+      "cyclic_patterns": {
+        "weekly_cycle": 0.6313007384999071,
+        "detected_cycles": [
+          {
+            "type": "discussion_peaks",
+            "average_length": 3.5076923076923077,
+            "count": 66
+          }
+        ]
+      }
+    },
+    "anomaly_count": 1,
+    "high_severity_anomalies": 1,
+    "category_trends_count": 8,
+    "insights_count": 3,
+    "key_insights": [
+      "\ud83d\udd25 Peak activity occurred on March 23, 2024 with 98 discussions",
+      "\ud83d\udcc5 Highest activity occurs on Saturdays",
+      "\u26a0\ufe0f Detected 1 significant activity spikes/drops"
+    ],
+    "forecast_confidence": "low",
+    "metadata": {
+      "total_discussions": 18130,
+      "time_range": {
+        "start": "2024-01-01T00:00:00",
+        "end": "2024-08-19T00:00:00"
+      },
+      "granularity": "daily",
+      "analysis_date": "2025-08-19T23:10:14.514136"
+    }
+  },
+  "metadata": {
+    "total_discussions": 18130,
+    "time_range": {
+      "start": "2024-01-01T00:00:00",
+      "end": "2024-08-19T00:00:00"
+    },
+    "granularity": "daily",
+    "analysis_date": "2025-08-19T23:10:14.514136"
+  }
+}
